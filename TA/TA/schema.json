@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+   "definitions": {
+    "Empty": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string",
+          "format": "uri",
+          "qt-uri-protocols": [
+            "https"
+          ],
+          "qt-uri-extensions": [
+            ".jpg"
+          ]
+        }
+      },
+      "required": [
+        "avatar",
+        "email",
+        "first_name",
+        "id",
+        "last_name"
+      ],
+      "title": "Empty"
+    }
+  }
+}
