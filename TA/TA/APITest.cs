@@ -43,14 +43,13 @@ namespace DemoAutomation
 
             var content = response.Content;
 
-            var user = JsonConvert.DeserializeObject<User>(content);
+            var result = JsonConvert.DeserializeObject<UsersList>(content);
+            
+            Assert.AreEqual(2, result.Page,"Page not found");
 
-            if (user.id == 10)
-            {
+            Assert.AreEqual("Byron", result.Data[3].First_Name,"Name does not match");   // Matching first_name in response with expected
 
-                Assert.AreEqual("Byron",user.first_name,"first_name does not match");  // Matching first_name in response with expected
-            }
-
+            
         }
 
         //API Post req Test
@@ -62,10 +61,10 @@ namespace DemoAutomation
 
             var request = new RestRequest("/api/users", Method.Post);
             request.AddHeader("Accept", "application/json");
-            request.AddJsonBody(new User
+            request.AddJsonBody(new Data
             {
-                name = "Bryant",
-                job ="BA"
+                Name = "Bryant",
+                Job ="BA"
 
             });
 
@@ -76,10 +75,10 @@ namespace DemoAutomation
             
             var content = response.Content;
 
-            var user = JsonConvert.DeserializeObject<User>(content);
+            var user = JsonConvert.DeserializeObject<Data>(content);
 
-
-            Assert.IsNotNull(user.id, "Id is not generated successfully");   //Verifying Id is generated
+           
+            Assert.IsNotNull(user.Id, "Id is not generated successfully");   //Verifying Id is generated
             
             
             JSchema schema = JSchema.Parse(System.IO.File.ReadAllText("schema.json"));
